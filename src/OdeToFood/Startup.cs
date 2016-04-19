@@ -34,7 +34,7 @@ namespace OdeToFood
         {
             app.UseIISPlatformHandler();
 
-            app.UseWelcomePage();
+            app.UseRuntimeInfoPage("/info");
 
             app.Run(async (context) =>
             {
