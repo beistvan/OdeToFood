@@ -22,6 +22,7 @@ namespace OdeToFood
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeder>();
         }
@@ -39,21 +40,12 @@ namespace OdeToFood
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                //...
-            }
-
+            
             app.UseRuntimeInfoPage("/info");
+            
+            app.UseFileServer();
 
-            //https://www.nuget.org/packages/Microsoft.AspNet.StaticFiles/1.0.0-rc1-final
-            //ASP.NET 5 static files middleware.
-
-            //To install Microsoft.AspNet.StaticFiles, run the following command 
-            //in the Package Manager Console
-            //PM> Install - Package Microsoft.AspNet.StaticFiles - Pre
-
-            app.UseFileServer();            
+            app.UseMvcWithDefaultRoute();            
 
             app.Run(async (context) =>
             {
