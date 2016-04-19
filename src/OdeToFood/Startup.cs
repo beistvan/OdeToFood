@@ -30,13 +30,32 @@ namespace OdeToFood
         //Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
+            IHostingEnvironment environment,
             IGreeter greeter)
         {
             app.UseIISPlatformHandler();
 
-            app.UseDeveloperExceptionPage();
+            if (environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                //...
+            }
 
             app.UseRuntimeInfoPage("/info");
+
+            //https://www.nuget.org/packages/Microsoft.AspNet.StaticFiles/1.0.0-rc1-final
+            //ASP.NET 5 static files middleware.
+
+            //To install Microsoft.AspNet.StaticFiles, run the following command 
+            //in the Package Manager Console
+            //PM> Install - Package Microsoft.AspNet.StaticFiles - Pre
+
+            app.UseStaticFiles();
+
+            
 
             app.Run(async (context) =>
             {
