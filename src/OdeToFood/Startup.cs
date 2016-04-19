@@ -54,12 +54,12 @@ namespace OdeToFood
             //PM> Install - Package Microsoft.AspNet.StaticFiles - Pre
 
             app.UseStaticFiles();
-
+            app.UseDefaultFiles();
             
 
             app.Run(async (context) =>
             {
-                throw new System.Exception("Error!");
+                //throw new System.Exception("Error!");
                 var greeting = greeter.GetGreeting();
                 await context.Response.WriteAsync(greeting);
             });
