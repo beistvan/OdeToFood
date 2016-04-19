@@ -53,9 +53,7 @@ namespace OdeToFood
             //in the Package Manager Console
             //PM> Install - Package Microsoft.AspNet.StaticFiles - Pre
 
-            app.UseStaticFiles();
-            app.UseDefaultFiles();
-            
+            app.UseFileServer();            
 
             app.Run(async (context) =>
             {
