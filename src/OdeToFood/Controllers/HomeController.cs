@@ -30,7 +30,7 @@ namespace OdeToFood.Controllers
             var model = _restaurantData.Get(id);
             if(model == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
 
             return View(model);
