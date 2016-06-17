@@ -8,7 +8,7 @@ namespace OdeToFood.Controllers
         public ViewResult Index()
         {
             var model = new Reastaurant { Id = 1, Name = "Sabatino's"};
-            return View();
+            return View(model);
         }
     }
 }
