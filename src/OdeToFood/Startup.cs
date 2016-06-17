@@ -6,6 +6,8 @@ using Microsoft.AspNet.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OdeToFood.Services;
+using OdeToFood.Entities;
+using Microsoft.Data.Entity;
 
 namespace OdeToFood
 {
@@ -25,9 +27,15 @@ namespace OdeToFood
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<OdeToFoodDbContext>(
+                options => options.UseSqlServer(Configuration["database:connection"]));
+
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeder>();
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
         }
 
         // This method gets called by the runtime. 
