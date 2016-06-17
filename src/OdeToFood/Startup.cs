@@ -27,6 +27,7 @@ namespace OdeToFood
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeder>();
+            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
         }
 
         // This method gets called by the runtime. 
