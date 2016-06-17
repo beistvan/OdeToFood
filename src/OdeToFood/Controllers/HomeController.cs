@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNet.Mvc;
+using OdeToFood.Models;
 
 namespace OdeToFood.Controllers
 {
     public class HomeController : Controller
     {
-        public ContentResult Index()
-        {            
-            return Content("Hello, from a controller!");
+        public ObjectResult Index()
+        {
+            var model = new Reastaurant { Id = 1, Name = "Sabatino's"};
+            return new ObjectResult(model);
         }
     }
 }
