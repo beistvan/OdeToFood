@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OdeToFood.Services;
 using OdeToFood.Entities;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OdeToFood
 {
@@ -33,6 +34,9 @@ namespace OdeToFood
                 .AddDbContext<OdeToFoodDbContext>(
                 options => options.UseSqlServer(Configuration["database:connection"]));
 
+            services.AddIdentity<User, IdentityRole>().
+                AddEntityFrameworkStores<OdeToFoodDbContext>();
+
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeder>();
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
@@ -55,6 +59,8 @@ namespace OdeToFood
             app.UseRuntimeInfoPage("/info");
             
             app.UseFileServer();
+
+            app.UseIdentity();
 
             app.UseMvc(ConfigureRoutes);            
 
