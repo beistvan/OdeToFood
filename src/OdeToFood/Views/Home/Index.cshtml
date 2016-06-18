@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>Welcome!</h1>
-<h3>@Model.CurrentGreeting</h3>
 <table>
     @foreach (var restaurant in Model.Restaurants)
     {
@@ -16,4 +15,7 @@
             <td>@restaurant.Name</td>
         </tr>
     }
-</table>    
+</table>  
+@section footer{ 
+    <div>@Model.CurrentGreeting</div>
+}  
