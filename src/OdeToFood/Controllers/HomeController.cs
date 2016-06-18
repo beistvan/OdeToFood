@@ -44,10 +44,9 @@ namespace OdeToFood.Controllers
             if (restaurant != null && ModelState.IsValid)
             {
                 restaurant.Name = input.Name;
-                restaurant.Cuisine = input.Cuisine;
-                //_restaurantData.Update(); //tradit.data.acces layer
-                //..
+                restaurant.Cuisine = input.Cuisine;               
                 _restaurantData.Commit();
+
                 return RedirectToAction("Details", new { id = restaurant.Id });
             }
             return View(restaurant);
