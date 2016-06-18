@@ -20,10 +20,37 @@ namespace OdeToFood.Controllers
         public ViewResult Index()
         {
             var model = new HomePageViewModel();
-            model.Restaurants =_restaurantData.GetAll();
+            model.Restaurants = _restaurantData.GetAll();
             model.CurrentGreeting = _greeter.GetGreeting();
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = _restaurantData.Get(id);
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, RestaurantEditViewModel input)
+        {
+            var restaurant = _restaurantData.Get(id);
+            if (restaurant != null && ModelState.IsValid)
+            {
+                restaurant.Name = input.Name;
+                restaurant.Cuisine = input.Cuisine;
+                //_restaurantData.Update(); //tradit.data.acces layer
+                //..
+                _restaurantData.Commit();
+                return RedirectToAction("Details", new { id = restaurant.Id });
+            }
+            return View(restaurant);
         }
 
         [HttpGet]
@@ -43,6 +70,7 @@ namespace OdeToFood.Controllers
                 restaurant.Cuisine = model.Cuisine;
 
                 _restaurantData.Add(restaurant);
+                _restaurantData.Commit();
 
                 return RedirectToAction("Details", new { id = restaurant.Id });
             }
@@ -51,7 +79,7 @@ namespace OdeToFood.Controllers
         public IActionResult Details(int id)
         {
             var model = _restaurantData.Get(id);
-            if(model == null)
+            if (model == null)
             {
                 return RedirectToAction("Index");
             }

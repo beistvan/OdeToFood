@@ -7,18 +7,15 @@
 <table>
     @foreach (var restaurant in Model.Restaurants)
     {
-        <tr>
-            <td>                
-                <a asp-action="Details" asp-route-id="@restaurant.Id">Details</a>
-            </td>
+        <tr>            
             <td>@restaurant.Name</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@restaurant.Id">Details</a>
+                <a asp-action="Edit" asp-route-id="@restaurant.Id">Edit</a>
+            </td>
         </tr>
     }
 </table>
-
-<cache>
-
-</cache>
 
 <a asp-action="Create">Create</a>
 
